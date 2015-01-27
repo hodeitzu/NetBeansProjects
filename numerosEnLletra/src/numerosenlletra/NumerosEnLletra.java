@@ -126,11 +126,26 @@ static String digits9EnLletres(int num){
         div=resto/(int)Math.pow(10, (cont-1)*3);
         //System.out.println(div);
         if(cont==3){
-            digits=digits3EnLletres(div)+" milions ";
+            if(div!=0){
+                if(div!=1){
+                    digits=digits3EnLletres(div)+" milions ";
+                }
+                else{
+                    digits=digits3EnLletres(div)+" milió ";
+                }
+            }
         }
         else{
             if(cont==2){
-                digits=digits+digits3EnLletres(div)+" mil ";
+                System.out.println(div);
+                if(div!=0){
+                    if(div==1){
+                        digits=digits+" mil ";
+                    }
+                    else{
+                        digits=digits+digits3EnLletres(div)+" mil ";
+                    }
+                }
             }
             else{
                 digits=digits+digits3EnLletres(div);
@@ -140,7 +155,12 @@ static String digits9EnLletres(int num){
         //System.out.println(resto);
         cont--;
     }while((resto!=0)&&(cont>0));
-    digitsf=digitsf+digits;
+    if(digits!=""){
+        digitsf=digitsf+digits;
+    }
+    else{
+        digitsf=digitsf+"zero patatero";
+    }
     
     return digitsf;
 }
@@ -196,11 +216,10 @@ static String digits3EnLletres(int num){
     }
             
         
-/*-------------------------------X--------------------------------------------*/
-        if ((c=="cero")&&(d=="cero")&&(u!="")){//SOLO UNIDADES(CON VALOR).
-            digits=(num+" = "+u);
-        }
-    
+/*-------------------------------X--------------------------------------------*/   
+    if ((c=="cero")&&(d=="cero")&&(u!="")){//SOLO UNIDADES(CON VALOR).
+            digits=u;
+    }   
     
     return digits;
 }
